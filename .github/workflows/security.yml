@@ -10,6 +10,12 @@ jobs:
       - name: Chekout du repository
         uses: actions/checkout@v4
 
+      - name: Lint Dockerfile
+        uses: hadolint/hadolint-action@3.1.0
+        with:
+          dockerfile: Dockerfile.myfixed
+          failure-threshold: warning
+
       - name: Build image
         run: docker build -f Dockerfile.myfixed -t app:${{ github.sha }} .
 
